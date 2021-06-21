@@ -74,6 +74,26 @@ matrix:
         - CIBW_ENVIRONMENT='HTSLIB_CONFIGURE_OPTIONS="--disable-libcurl"'
         - CIBW_REPAIR_WHEEL_COMMAND_LINUX='auditwheel repair -L . -w {dest_dir} {wheel}'
         - CIBW_TEST_COMMAND='python -c "import pysam"'
+    - stage: deploy aarch64
+      os: linux
+      arch: arm64
+      language: python
+      python: '3.5'
+      addons:
+        apt:
+          packages:
+            - gcc
+            - g++
+            - libcurl4-openssl-dev  # for libcurl support in sdist
+            - libssl-dev  # for s3 support in sdist
+      install:
+        - python3 -m pip install Cython twine
+      script:
+        - set -e
+        - python3 setup.py build_ext --inplace
+        - python3 setup.py sdist
+        - twine check dist/*
+        - twine upload --skip-existing dist/*
     - <<: *cibw_linux
       env:
         - CIBW_BUILD="*_aarch64"

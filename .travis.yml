@@ -74,6 +74,13 @@ matrix:
         - CIBW_ENVIRONMENT='HTSLIB_CONFIGURE_OPTIONS="--disable-libcurl"'
         - CIBW_REPAIR_WHEEL_COMMAND_LINUX='auditwheel repair -L . -w {dest_dir} {wheel}'
         - CIBW_TEST_COMMAND='python -c "import pysam"'
+    - <<: *cibw_linux
+      env:
+        - CIBW_BUILD="*_aarch64"
+        - CIBW_BEFORE_BUILD="yum install -y zlib-devel bzip2-devel xz-devel && python -m pip install -r requirements.txt"
+        - CIBW_ENVIRONMENT='HTSLIB_CONFIGURE_OPTIONS="--disable-libcurl"'
+        - CIBW_REPAIR_WHEEL_COMMAND_LINUX='auditwheel repair -L . -w {dest_dir} {wheel}'
+        - CIBW_TEST_COMMAND='python -c "import pysam"'
     - stage: deploy
       os: osx
       language: generic

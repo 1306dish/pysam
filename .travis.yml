@@ -7,7 +7,7 @@ language: c
 stages:
   - test
   - name: deploy
-    if: tag IS present
+    #if: tag IS present
 
 env:
   matrix:

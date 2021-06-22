@@ -74,7 +74,7 @@ matrix:
         - CIBW_ENVIRONMENT='HTSLIB_CONFIGURE_OPTIONS="--disable-libcurl"'
         - CIBW_REPAIR_WHEEL_COMMAND_LINUX='auditwheel repair -L . -w {dest_dir} {wheel}'
         - CIBW_TEST_COMMAND='python -c "import pysam"'
-    - stage: deploy aarch64
+    - stage: deploy
       os: linux
       arch: arm64
       language: python

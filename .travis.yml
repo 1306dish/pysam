@@ -23,7 +23,7 @@ env:
 _cibw_common: &cibw_common
   addons: {}
   install:
-    - python3 -m pip install cibuildwheel>=1.1.0 twine
+    - python3 -m pip install cibuildwheel>=1.11.0 twine
   script:
     - set -e
     - cibuildwheel --output-dir dist

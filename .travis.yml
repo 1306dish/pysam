@@ -78,22 +78,7 @@ matrix:
       os: linux
       arch: arm64
       language: python
-      python: '3.5'
-      addons:
-        apt:
-          packages:
-            - gcc
-            - g++
-            - libcurl4-openssl-dev  # for libcurl support in sdist
-            - libssl-dev  # for s3 support in sdist
-      install:
-        - python3 -m pip install Cython twine
-      script:
-        - set -e
-        - python3 setup.py build_ext --inplace
-        - python3 setup.py sdist
-        - twine check dist/*
-        - twine upload --skip-existing dist/*
+      python: '3.5'      
     - <<: *cibw_linux
       env:
         - CIBW_BUILD="*_aarch64"
